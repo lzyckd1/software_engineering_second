@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <set>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 const int maxn = 1000;
@@ -17,6 +18,45 @@ vector <lise> sseq;
 vector <Cycle> cseq;
 vector <rays> rseq;
 int countn = 0;
+
+double distance_nn(node a, node b)
+{
+	//两点间距离的平方
+	double ans, x = a.getX() - b.getX(), y = a.getY() - b.getY();
+	ans = x*x+y*y;
+	return ans;
+}
+
+double distance_nl(node a, line b)
+{
+	//点到直线距离的平方
+	double ans, A = b.getA(), B = b.getB(), C = b.getC();
+	ans = A*a.getX()+B*a.getY()+C;
+	ans *= ans;
+	ans /= A * A + B * B;
+	return ans;
+}
+
+double distance_nl(node a, lise b)
+{
+	//点到直线距离的平方
+	double ans, A = b.getA(), B = b.getB(), C = b.getC();
+	ans = A * a.getX() + B * a.getY() + C;
+	ans *= ans;
+	ans /= A * A + B * B;
+	return ans;
+}
+
+double distance_nl(node a, rays b)
+{
+	//点到直线距离的平方
+	double ans, A = b.getA(), B = b.getB(), C = b.getC();
+	ans = A * a.getX() + B * a.getY() + C;
+	ans *= ans;
+	ans /= A * A + B * B;
+	return ans;
+}
+
 node findIntersectionll(line a, line b)
 {
 	double x = 0, y = 0, d;
@@ -273,6 +313,178 @@ void add_node_rs(rays a, lise b)
 	return;
 }
 
+void add_node_cc(Cycle a, Cycle b)
+{
+	double distance = distance_nn(a.getC(), b.getC());
+	if (distance > (a.getR()+ b.getR())* (a.getR() + b.getR())) {
+		return;
+	}
+	double x1 = a.getC().getX(), y1 = a.getC().getY(), r1 = a.getR();
+	double x2 = b.getC().getX(), y2 = b.getC().getY(), r2 = b.getR();
+	if (y1 == y2) {
+		if (x1 == x2)exit(1);
+		double x = ((r1 * r1 - r2 * r2) / (x2 - x1) + x1 + x2) / 2;
+		double delta = sqrt(r1 * r1 - (x - x1) * (x - x1));
+		node n1 = node(x, y1 + delta), n2 = node(x, y1 - delta);
+		if (node_set.find(n1) == node_set.end()) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end()) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	else {
+		double p = (x1 - x2) / (y2 - y1), t = -p * (x1 + x2) / 2 + (r1 * r1 - r2 * r2) / (y2 - y1) / 2 + (y2 - y1) / 2;
+		double delta = sqrt((p * t - x1)* (p * t - x1)-(1+p*p)*(x1*x1+t*t-r1*r1));
+		double ansx1 = (x1 - p * t + delta) / (1 + p * p), ansx2 = (x1 - p * t - delta) / (1 + p * p);
+		node n1 = node(ansx1, (r1*r1-r2*r2)/(y2-y1)/2+p*(ansx1-(x1+x2)/2)+(y1+y2)/2),n2 = node(ansx2, (r1 * r1 - r2 * r2) / (y2 - y1) / 2 + p * (ansx2 - (x1 + x2) / 2) + (y1 + y2) / 2);
+		if (node_set.find(n1) == node_set.end()) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end()) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	return;
+}
+
+void add_node_cl(Cycle a, line b)
+{
+	double distance = distance_nl(a.getC(), b);
+	printf("start\n");
+	if (distance > a.getR()* a.getR()) {
+		return;
+	}
+	printf("part1\n");
+	if (!b.getExitK()) {
+		double x = b.getNode1().getX();
+		double y = sqrt(a.getR() * a.getR() - (x - a.getC().getX()) * (x - a.getC().getX()));
+		double y1 = a.getC().getY() - y, y2 = a.getC().getY() + y;
+		node n1 = node(x, y1), n2 = node(x, y2);
+		if (node_set.find(n1) == node_set.end()) {
+			printf("!!!!!!!\n");
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end()) {
+			printf("!!!!!!!\n");
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	else {
+		double k = b.getK(), j = -b.getC() / b.getB();
+		double x0 = a.getC().getX(), y0 = a.getC().getY(), r = a.getR();
+		double t = j - y0, m = x0-k*t, n = 1 + k*k,o = x0*x0+t*t-r*r;
+		//if (o < 0)return;
+		double x1 = (m + sqrt(m*m - n*o))/n, x2 = (m - sqrt(m * m - n * o)) / n;
+		node n1 = node(x1, k * x1 + j), n2 = node(x2, k * x2 + j);
+		printf("%lf %lf %lf %lf %lf %lf %lf %lf %lf\n",k,j,t,m,n,o,x1,x2,m*m-n*o);
+		printf("%lf %lf %lf %lf\n", n1.getX(), n1.getY(), n2.getX(), n2.getY());
+		if (node_set.find(n1) == node_set.end()) {
+			printf("?????\n");
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end()) {
+			printf("?????\n");
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	return;
+}
+
+void add_node_cs(Cycle a, lise b)
+{
+	double distance = distance_nl(a.getC(), b);
+	if (distance > a.getR()* a.getR()) {
+		return;
+	}
+	if (!b.getExitK()) {
+		double x = b.getNode1().getX();
+		double y = sqrt(a.getR() * a.getR() - (x - a.getC().getX()) * (x - a.getC().getX()));
+		double y1 = a.getC().getY() - y, y2 = a.getC().getY() + y;
+		node n1 = node(x, y1), n2 = node(x, y2);
+		if (node_set.find(n1) == node_set.end() && b.judge(n1)) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end() && b.judge(n2)) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	else {
+		double k = b.getK(), j = -b.getC() / b.getB();
+		double x0 = a.getC().getX(), y0 = a.getC().getY(), r = a.getR();
+		double t = j - y0, m = x0 - k * t, n = 1 + k * k, o = x0 * x0 + t * t - r * r;
+		if (o < 0)return;
+		double x1 = (m + sqrt(m * m - n * o)) / n, x2 = (m - sqrt(m * m - n * o)) / n;
+		node n1 = node(x1, k * x1 + j), n2 = node(x2, k * x2 + j);
+		if (node_set.find(n1) == node_set.end() && b.judge(n1)) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end() && b.judge(n2)) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	return;
+}
+
+void add_node_cr(Cycle a, rays b)
+{
+	double distance = distance_nl(a.getC(), b);
+	if (distance > a.getR()* a.getR()) {
+		return;
+	}
+	if (!b.getExitK()) {
+		double x = b.getStart().getX();
+		double y = sqrt(a.getR() * a.getR() - (x - a.getC().getX()) * (x - a.getC().getX()));
+		double y1 = a.getC().getY() - y, y2 = a.getC().getY() + y;
+		node n1 = node(x, y1), n2 = node(x, y2);
+		if (node_set.find(n1) == node_set.end() && b.judge(n1)) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end() && b.judge(n2)) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	else {
+		double k = b.getK(), j = -b.getC() / b.getB();
+		double x0 = a.getC().getX(), y0 = a.getC().getY(), r = a.getR();
+		double t = j - y0, m = x0 - k * t, n = 1 + k * k, o = x0 * x0 + t * t - r * r;
+		if (o < 0)return;
+		double x1 = (m + sqrt(m * m - n * o)) / n, x2 = (m - sqrt(m * m - n * o)) / n;
+		node n1 = node(x1, k * x1 + j), n2 = node(x2, k * x2 + j);
+		if (node_set.find(n1) == node_set.end() && b.judge(n1)) {
+			countn = countn + 1;
+			node_set.insert(n1);
+		}
+		if (node_set.find(n2) == node_set.end() && b.judge(n2)) {
+			countn = countn + 1;
+			node_set.insert(n2);
+		}
+		return;
+	}
+	return;
+}
+
 int main(int argc, char** argv)
 {
 	int n;
@@ -298,6 +510,9 @@ int main(int argc, char** argv)
 			for (int j = 0, size = rseq.size(); j < size; j++) {
 				add_node_lr(tmp, rseq[j]);
 			}
+			for (int j = 0, size = cseq.size(); j < size; j++) {
+				add_node_cl(cseq[j],tmp);
+			}
 			lseq.push_back(tmp);
 		}
 		else if (p == 'C') {
@@ -305,6 +520,18 @@ int main(int argc, char** argv)
 			infile >> a >> b >> c;
 			node n1(a, b);
 			Cycle tmp(n1, c);
+			for (int j = 0, size = cseq.size(); j < size; j++) {
+				add_node_cc(cseq[j], tmp);
+			}
+			for (int j = 0, size = lseq.size(); j < size; j++) {
+				add_node_cl(tmp, lseq[j]);
+			}
+			for (int j = 0, size = rseq.size(); j < size; j++) {
+				add_node_cr(tmp, rseq[j]);
+			}
+			for (int j = 0, size = sseq.size(); j < size; j++) {
+				add_node_cs(tmp, sseq[j]);
+			}
 			cseq.push_back(tmp);
 		}
 		else if (p == 'S') {
@@ -321,14 +548,16 @@ int main(int argc, char** argv)
 			for (int j = 0, size = rseq.size(); j < size; j++) {
 				add_node_rs(rseq[j], tmp);
 			}
+			for (int j = 0, size = cseq.size(); j < size; j++) {
+				add_node_cs(cseq[j], tmp);
+			}
 			sseq.push_back(tmp);
 		}
 		else if (p == 'R') {
 			int size = 0;
 			infile >> a >> b >> c >> d;
 			node n1(a, b), n2(c, d);
-			rays tmp(n1, n2);
-			rseq.push_back(tmp);
+			rays tmp(n1, n2);	
 			for (int j = 0, size = lseq.size(); j < size; j++) {
 				add_node_lr(lseq[j], tmp);
 			}
@@ -338,6 +567,10 @@ int main(int argc, char** argv)
 			for (int j = 0, size = rseq.size(); j < size; j++) {
 				add_node_rr(tmp, rseq[j]);
 			}
+			for (int j = 0, size = cseq.size(); j < size; j++) {
+				add_node_cr(cseq[j], tmp);
+			}
+			rseq.push_back(tmp);
 		}
 		else {
 			exit(1);
