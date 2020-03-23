@@ -719,22 +719,20 @@ void delete_node_cr(Cycle a, rays b)
 }
 
 void get_int(string l, double* a, double* b, double* c, double* d) {
-	int ans[4] = { 0 },op = 1;
+	int ans[4] = { 0 };
 	for (int i = 1, k = 0, j, change = 0; i < l.size(); i++)
 	{
-		if (l[i] == '-')op = -1;
 		for (j = i; l[j] <= '9' && l[j] >= '0'; j++)
 		{
 			ans[k] = ans[k] * 10 + l[j] - '0';
 			change = 1;
 		}
 		if (change == 1) {
-			ans[k] *= op;
-			op = 1;
 			k++;
 			i = j;
 			change = 0;
 		}
+
 	}
 	*a = (double)ans[0];
 	*b = (double)ans[1];
@@ -745,17 +743,14 @@ void get_int(string l, double* a, double* b, double* c, double* d) {
 
 void get_int(string l, double* a, double* b, double* c) {
 	int ans[3] = { 0 };
-	for (int i = 1, k = 0, j, change = 0,op = 1; i < l.size(); i++)
+	for (int i = 1, k = 0, j, change = 0; i < l.size(); i++)
 	{
-		if (l[i] == '-')op = -1;
 		for (j = i; l[j] <= '9' && l[j] >= '0'; j++)
 		{
 			ans[k] = ans[k] * 10 + l[j] - '0';
 			change = 1;
 		}
 		if (change == 1) {
-			ans[k] *= op;
-			op = 1;
 			k++;
 			i = j;
 			change = 0;
@@ -885,106 +880,20 @@ void Delete(string l)
 	}
 }
 
-int string2int(string l)
-{
-	int ans = 0, op = 1;
-	if (l[0] == '-')op = -1;
-	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
-	else {
-		try {
-			throw "wrong input!\n";
-		}
-		catch (const char* msg) {
-			cerr << msg << endl;
-		}
-	}
-	for (int i = 1; i < l.size(); i++)
-	{
-		if (!(l[i] <= '9' && l[i] >= '0'))
-		{
-			try {
-				throw "wrong input!\n";
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-			}
-		}
-		ans = ans * 10 + l[i] - '0';
-	}
-	ans *= op;
-	return ans;
-}
-
-double string2double(string l)
-{
-	int ans = 0,op = 1;
-	if (l[0] == '-')op = -1;
-	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
-	for (int i = 1; i < l.size(); i++)
-	{
-		if (!(l[i] <= '9' && l[i] >= '0'))
-		{
-			try {
-				throw "wrong input!\n";
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-			}
-		}
-		ans = ans * 10 + (l[i] - '0');
-		//printf("%d\n", i);
-	}
-	ans *= op;
-	return (double)ans;
-}
-
-char string2char(string l)
-{
-	if (l.size() != 1) {
-		try {
-			throw "wrong input!\n";
-		}
-		catch (const char* msg) {
-			cerr << msg << endl;
-		}
-	}
-	return l[0];
-}
-
 int main(int argc, char** argv)
 {
 	int n;
 	double a, b, c, d;
-	string s_tmp;
 	char p;
-	ifstream infile(argv[2]);  // argv[2]
-	ofstream outfile(argv[4]);   // argv[4]
-	if (!infile) {
-		try {
-			throw "input file error!\n";
-		}
-		catch (const char* msg) {
-			cerr << msg << endl;
-		}
-	}
-	infile >> s_tmp;
-	
-	n = string2int(s_tmp);
-	
+	ifstream infile("input.txt");  // argv[2]
+	ofstream outfile("output.txt");   // argv[4]
+	infile >> n;
 	for (int i = 0; i < n; i++)
 	{
-		infile >> s_tmp;
-		p = string2char(s_tmp);
+		infile >> p;
 		if (p == 'L') {
 			int size = 0;
-			infile >> s_tmp;
-			a = string2double(s_tmp);
-			infile >> s_tmp;
-			b = string2double(s_tmp);
-			infile >> s_tmp;
-			c = string2double(s_tmp);
-			infile >> s_tmp;
-			d = string2double(s_tmp);
+			infile >> a >> b >> c >> d;
 			node n1(a, b), n2(c, d);
 			line tmp(n1, n2);
 			for (int j = 0, size = lseq.size(); j < size; j++) {
@@ -1003,12 +912,7 @@ int main(int argc, char** argv)
 		}
 		else if (p == 'C') {
 			int size = 0;
-			infile >> s_tmp;
-			a = string2double(s_tmp);
-			infile >> s_tmp;
-			b = string2double(s_tmp);
-			infile >> s_tmp;
-			c = string2double(s_tmp);
+			infile >> a >> b >> c;
 			node n1(a, b);
 			Cycle tmp(n1, c);
 			for (int j = 0, size = cseq.size(); j < size; j++) {
@@ -1027,14 +931,7 @@ int main(int argc, char** argv)
 		}
 		else if (p == 'S') {
 			int size = 0;
-			infile >> s_tmp;
-			a = string2double(s_tmp);
-			infile >> s_tmp;
-			b = string2double(s_tmp);
-			infile >> s_tmp;
-			c = string2double(s_tmp);
-			infile >> s_tmp;
-			d = string2double(s_tmp);
+			infile >> a >> b >> c >> d;
 			node n1(a, b), n2(c, d);
 			lise tmp(n1, n2);
 			for (int j = 0, size = lseq.size(); j < size; j++) {
@@ -1053,14 +950,7 @@ int main(int argc, char** argv)
 		}
 		else if (p == 'R') {
 			int size = 0;
-			infile >> s_tmp;
-			a = string2double(s_tmp);
-			infile >> s_tmp;
-			b = string2double(s_tmp);
-			infile >> s_tmp;
-			c = string2double(s_tmp);
-			infile >> s_tmp;
-			d = string2double(s_tmp);
+			infile >> a >> b >> c >> d;
 			node n1(a, b), n2(c, d);
 			rays tmp(n1, n2);	
 			for (int j = 0, size = lseq.size(); j < size; j++) {
@@ -1078,16 +968,9 @@ int main(int argc, char** argv)
 			rseq.push_back(tmp);
 		}
 		else {
-			
-			try {
-				throw "wrong input!\n";
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-			}
+			exit(1);
 		}
 	}
 	outfile << countn;
-	
 	return 0;
 }

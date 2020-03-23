@@ -1,38 +1,4 @@
-﻿  Cycle.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\Cycle.h(12,37): warning C4099: “Cycle”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\Cycle.h(3): message : 参见“Cycle”的声明
-  line.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\line.h(20,36): warning C4099: “line”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\line.h(3): message : 参见“line”的声明
-  lise.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\lise.h(20,36): warning C4099: “lise”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\lise.h(3): message : 参见“lise”的声明
-  node.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-  rays.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.h(20,36): warning C4099: “rays”: 类型名称以前使用“class”现在使用的是“struct”
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.h(3): message : 参见“rays”的声明
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.cpp(58,73): warning C4101: “tmp”: 未引用的局部变量
-  second_work.cpp
+﻿  second_work.cpp
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(11,35): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(2): message : 参见“node”的声明
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\node.h(17,36): warning C4099: “node”: 类型名称以前使用“class”现在使用的是“struct”
@@ -46,6 +12,7 @@ F:\learning\大三下\软件工程\实验\second\intersect\second_work\lise.h(3)
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.h(20,36): warning C4099: “rays”: 类型名称以前使用“class”现在使用的是“struct”
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.h(3): message : 参见“rays”的声明
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(723,42): warning C4018: “<”: 有符号/无符号不匹配
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(746,42): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
+F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(748,49): warning C4018: “<”: 有符号/无符号不匹配
+F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(901,20): warning C4018: “<”: 有符号/无符号不匹配
+F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(923,20): warning C4018: “<”: 有符号/无符号不匹配
   second_work.vcxproj -> F:\learning\大三下\软件工程\实验\second\intersect\Debug\second_work.exe
