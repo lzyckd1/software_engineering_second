@@ -1,25 +1,25 @@
 #pragma once
 #include "node.h"
-class line
+class rays
 {
 private:
-	node node1, node2;
+	node start, n;
 	double a, b, c, k;
 	bool exitK;
 public:
-	line();
-	line(node m, node n);
-	node getNode1();
-	node getNode2();
+	rays();
+	rays(node m, node n);
+	node getStart();
+	node getN();
 	double getA();
 	double getB();
 	double getC();
 	double getK();
 	bool getExitK();
 	bool judge(node n);
-	bool operator ==(const line& other) const
+	bool operator ==(const struct rays& other) const
 	{
-		if (a == other.a && b == other.b && c == other.c) return true;
+		if (start == other.start && n == other.n) return true;
 		else return false;
 	}
 };

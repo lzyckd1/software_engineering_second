@@ -17,9 +17,10 @@ public:
 	double getK();
 	bool getExitK();
 	bool judge(node n);
-	bool operator ==(const line& other) const
+	bool operator ==(const struct line& other) const
 	{
-		if (a == other.a && b == other.b && c == other.c) return true;
+		if (node1 == other.node1 && node2 == other.node2) return true;
+		else if (node1 == other.node2 && node2 == other.node1)return true;
 		else return false;
 	}
 };

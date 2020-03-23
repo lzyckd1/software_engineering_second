@@ -20,82 +20,6 @@ vector <Cycle> cseq;
 vector <rays> rseq;
 int countn = 0;
 
-void error_output(string errors)
-{
-	try {
-		throw errors;
-	}
-	catch (const char* msg) {
-		cerr << msg << endl;
-	}
-}
-
-int string2int(string l)
-{
-	int ans = 0, op = 1;
-	if (l[0] == '-')op = -1;
-	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
-	else {
-		try {
-			throw "wrong input!\n";
-		}
-		catch (const char* msg) {
-			cerr << msg << endl;
-		}
-	}
-	for (int i = 1; i < l.size(); i++)
-	{
-		if (!(l[i] <= '9' && l[i] >= '0'))
-		{
-			try {
-				throw "wrong input!\n";
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-			}
-		}
-		ans = ans * 10 + l[i] - '0';
-	}
-	ans *= op;
-	return ans;
-}
-
-double string2double(string l)
-{
-	int ans = 0, op = 1;
-	if (l[0] == '-')op = -1;
-	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
-	for (int i = 1; i < l.size(); i++)
-	{
-		if (!(l[i] <= '9' && l[i] >= '0'))
-		{
-			try {
-				throw "wrong input!\n";
-			}
-			catch (const char* msg) {
-				cerr << msg << endl;
-			}
-		}
-		ans = ans * 10 + (l[i] - '0');
-		//printf("%d\n", i);
-	}
-	ans *= op;
-	return (double)ans;
-}
-
-char string2char(string l)
-{
-	if (l.size() != 1) {
-		try {
-			throw "wrong input!\n";
-		}
-		catch (const char* msg) {
-			cerr << msg << endl;
-		}
-	}
-	return l[0];
-}
-
 double distance_nn(node a, node b)
 {
 	//两点间距离的平方
@@ -900,6 +824,7 @@ void Delete(string l)
 		for (int j = 0, size = sseq.size(); j < size; j++) {
 			delete_node_cs(tmp, sseq[j]);
 		}
+		
 	}
 	else if (p == 'S') {
 		int size = 0;
@@ -956,122 +881,15 @@ void Delete(string l)
 		
 	}
 	else {
-	error_output("wrong input!\n");
+		exit(1);
 	}
 }
 
-bool Add(string l) 
+int string2int(string l)
 {
-	char p = l[0];
-	double a, b, c, d;
-	if (p == 'L') {
-		int size = 0;
-		get_int(l, &a, &b, &c, &d);
-		node n1(a, b), n2(c, d);
-		line tmp(n1, n2);
-		for (vector<line>::iterator j = lseq.begin(); j != lseq.end();)
-		{
-			line tmp1 = *j;
-			if (tmp1 == tmp) {
-				error_output("this object had already been added!\n");
-				return false;
-			}
-		}
-		for (int j = 0, size = lseq.size(); j < size; j++) {
-			add_node_ll(tmp, lseq[j]);
-		}
-		for (int j = 0, size = sseq.size(); j < size; j++) {
-			add_node_ls(tmp, sseq[j]);
-		}
-		for (int j = 0, size = rseq.size(); j < size; j++) {
-			add_node_lr(tmp, rseq[j]);
-		}
-		for (int j = 0, size = cseq.size(); j < size; j++) {
-			add_node_cl(cseq[j], tmp);
-		}
-		lseq.push_back(tmp);
-	}
-	else if (p == 'C') {
-		int size = 0;
-		get_int(l, &a, &b, &c);
-		node n1(a, b);
-		Cycle tmp(n1, c);
-		for (vector<Cycle>::iterator j = cseq.begin(); j != cseq.end();)
-		{
-			Cycle tmp1 = *j;
-			if (tmp1 == tmp) {
-				error_output("this object had already been added!\n");
-				return false;
-			}
-		}
-		for (int j = 0, size = cseq.size(); j < size; j++) {
-			add_node_cc(cseq[j], tmp);
-		}
-		for (int j = 0, size = lseq.size(); j < size; j++) {
-			add_node_cl(tmp, lseq[j]);
-		}
-		for (int j = 0, size = rseq.size(); j < size; j++) {
-			add_node_cr(tmp, rseq[j]);
-		}
-		for (int j = 0, size = sseq.size(); j < size; j++) {
-			add_node_cs(tmp, sseq[j]);
-		}
-		cseq.push_back(tmp);
-	}
-	else if (p == 'S') {
-		int size = 0;
-		get_int(l, &a, &b, &c, &d);
-		node n1(a, b), n2(c, d);
-		lise tmp(n1, n2);
-		for (vector<lise>::iterator j = sseq.begin(); j != sseq.end();)
-		{
-			lise tmp1 = *j;
-			if (tmp1 == tmp) {
-				error_output("this object had already been added!\n");
-				return false;
-			}
-		}
-		for (int j = 0, size = lseq.size(); j < size; j++) {
-			add_node_ls(lseq[j], tmp);
-		}
-		for (int j = 0, size = sseq.size(); j < size; j++) {
-			add_node_ss(tmp, sseq[j]);
-		}
-		for (int j = 0, size = rseq.size(); j < size; j++) {
-			add_node_rs(rseq[j], tmp);
-		}
-		for (int j = 0, size = cseq.size(); j < size; j++) {
-			add_node_cs(cseq[j], tmp);
-		}
-		sseq.push_back(tmp);
-	}
-	else if (p == 'R') {
-		int size = 0;
-		get_int(l, &a, &b, &c, &d);
-		node n1(a, b), n2(c, d);
-		rays tmp(n1, n2);
-		for (vector<rays>::iterator j = rseq.begin(); j != rseq.end();)
-		{
-			rays tmp1 = *j;
-			if (tmp1 == tmp) {
-				error_output("this object had already been added!\n");
-				return false;
-			}
-		}
-		for (int j = 0, size = lseq.size(); j < size; j++) {
-			add_node_lr(lseq[j], tmp);
-		}
-		for (int j = 0, size = sseq.size(); j < size; j++) {
-			add_node_rs(tmp, sseq[j]);
-		}
-		for (int j = 0, size = rseq.size(); j < size; j++) {
-			add_node_rr(tmp, rseq[j]);
-		}
-		for (int j = 0, size = cseq.size(); j < size; j++) {
-			add_node_cr(cseq[j], tmp);
-		}
-		rseq.push_back(tmp);
-	}
+	int ans = 0, op = 1;
+	if (l[0] == '-')op = -1;
+	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
 	else {
 		try {
 			throw "wrong input!\n";
@@ -1080,21 +898,79 @@ bool Add(string l)
 			cerr << msg << endl;
 		}
 	}
+	for (int i = 1; i < l.size(); i++)
+	{
+		if (!(l[i] <= '9' && l[i] >= '0'))
+		{
+			try {
+				throw "wrong input!\n";
+			}
+			catch (const char* msg) {
+				cerr << msg << endl;
+			}
+		}
+		ans = ans * 10 + l[i] - '0';
+	}
+	ans *= op;
+	return ans;
 }
 
-void read_file(string input_file)
+double string2double(string l)
+{
+	int ans = 0,op = 1;
+	if (l[0] == '-')op = -1;
+	else if (l[0] <= '9' && l[0] >= '0')ans += l[0] - '0';
+	for (int i = 1; i < l.size(); i++)
+	{
+		if (!(l[i] <= '9' && l[i] >= '0'))
+		{
+			try {
+				throw "wrong input!\n";
+			}
+			catch (const char* msg) {
+				cerr << msg << endl;
+			}
+		}
+		ans = ans * 10 + (l[i] - '0');
+		//printf("%d\n", i);
+	}
+	ans *= op;
+	return (double)ans;
+}
+
+char string2char(string l)
+{
+	if (l.size() != 1) {
+		try {
+			throw "wrong input!\n";
+		}
+		catch (const char* msg) {
+			cerr << msg << endl;
+		}
+	}
+	return l[0];
+}
+
+int main(int argc, char** argv)
 {
 	int n;
 	double a, b, c, d;
 	string s_tmp;
 	char p;
-	ifstream infile(input_file);
+	ifstream infile(argv[2]);  // argv[2]
+	ofstream outfile(argv[4]);   // argv[4]
 	if (!infile) {
-		error_output("input file error!\n");
-		
+		try {
+			throw "input file error!\n";
+		}
+		catch (const char* msg) {
+			cerr << msg << endl;
+		}
 	}
 	infile >> s_tmp;
+	
 	n = string2int(s_tmp);
+	
 	for (int i = 0; i < n; i++)
 	{
 		infile >> s_tmp;
@@ -1114,14 +990,14 @@ void read_file(string input_file)
 			for (int j = 0, size = lseq.size(); j < size; j++) {
 				add_node_ll(tmp, lseq[j]);
 			}
-			for (int j = 0, size = sseq.size(); j < size; j++) {
+			for (int j = 0,size = sseq.size(); j < size; j++) {
 				add_node_ls(tmp, sseq[j]);
 			}
 			for (int j = 0, size = rseq.size(); j < size; j++) {
 				add_node_lr(tmp, rseq[j]);
 			}
 			for (int j = 0, size = cseq.size(); j < size; j++) {
-				add_node_cl(cseq[j], tmp);
+				add_node_cl(cseq[j],tmp);
 			}
 			lseq.push_back(tmp);
 		}
@@ -1186,7 +1062,7 @@ void read_file(string input_file)
 			infile >> s_tmp;
 			d = string2double(s_tmp);
 			node n1(a, b), n2(c, d);
-			rays tmp(n1, n2);
+			rays tmp(n1, n2);	
 			for (int j = 0, size = lseq.size(); j < size; j++) {
 				add_node_lr(lseq[j], tmp);
 			}
@@ -1202,7 +1078,7 @@ void read_file(string input_file)
 			rseq.push_back(tmp);
 		}
 		else {
-
+			
 			try {
 				throw "wrong input!\n";
 			}
@@ -1211,13 +1087,7 @@ void read_file(string input_file)
 			}
 		}
 	}
-	return;
-}
-
-int main(int argc, char** argv)
-{
-	read_file("input.txt");//argv[2]
-	ofstream outfile("output.txt");   // argv[4]
-	cout << countn;
+	outfile << countn;
+	
 	return 0;
 }
