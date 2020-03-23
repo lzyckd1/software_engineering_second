@@ -293,24 +293,11 @@ void add_node_rr(rays a, rays b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if (a == b)return;
-		if (a.getStart() == b.getStart()) {
-			ans = a.getStart();
-			node_set_insert(ans);
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if (a == b)return;
-			if (a.getStart() == b.getStart()) {
-				ans = a.getStart();
-				node_set_insert(ans);
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionrr(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_insert(ans);
@@ -354,36 +341,11 @@ void add_node_ss(lise a, lise b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if (a == b)return;
-		if (a.getNode1() == b.getNode1() || a.getNode1() == b.getNode2()) {
-			ans = a.getNode1();
-			node_set_insert(ans);
-			return;
-		}
-		if (a.getNode2() == b.getNode1() || a.getNode2() == b.getNode2()) {
-			ans = a.getNode2();
-			node_set_insert(ans);
-			return;
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if (a == b)return;
-			if (a.getNode1() == b.getNode1() || a.getNode1() == b.getNode2()) {
-				ans = a.getNode1();
-				node_set_insert(ans);
-				return;
-			}
-			if (a.getNode2() == b.getNode1() || a.getNode2() == b.getNode2()) {
-				ans = a.getNode2();
-				node_set_insert(ans);
-				return;
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionss(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_insert(ans);
@@ -403,22 +365,11 @@ void add_node_rs(rays a, lise b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if ((a.getStart() == b.getNode1() && (a.judge(b.getNode2()) == false)) || (a.getStart() == b.getNode2() && (a.judge(b.getNode1()) == false)))
-		{
-			node_set_insert(a.getStart());
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if ((a.getStart() == b.getNode1() && (a.judge(b.getNode2()) == false)) || (a.getStart() == b.getNode2() && (a.judge(b.getNode1()) == false)))
-			{
-				node_set_insert(a.getStart());
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionrs(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_insert(ans);
@@ -618,24 +569,11 @@ void delete_node_rr(rays a, rays b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if (a == b)return;
-		if (a.getStart() == b.getStart()) {
-			ans = a.getStart();
-			node_set_delete(ans);
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if (a == b)return;
-			if (a.getStart() == b.getStart()) {
-				ans = a.getStart();
-				node_set_delete(ans);
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionrr(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_delete(ans);
@@ -679,36 +617,11 @@ void delete_node_ss(lise a, lise b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if (a == b)return;
-		if (a.getNode1() == b.getNode1() || a.getNode1() == b.getNode2()) {
-			ans = a.getNode1();
-			node_set_delete(ans);
-			return;
-		}
-		if (a.getNode2() == b.getNode1() || a.getNode2() == b.getNode2()) {
-			ans = a.getNode2();
-			node_set_delete(ans);
-			return;
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if (a == b)return;
-			if (a.getNode1() == b.getNode1() || a.getNode1() == b.getNode2()) {
-				ans = a.getNode1();
-				node_set_delete(ans);
-				return;
-			}
-			if (a.getNode2() == b.getNode1() || a.getNode2() == b.getNode2()) {
-				ans = a.getNode2();
-				node_set_delete(ans);
-				return;
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionss(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_delete(ans);
@@ -728,22 +641,11 @@ void delete_node_rs(rays a, lise b)
 	node ans;
 	if ((!a.getExitK()) && (!b.getExitK()))//a,b均平行于y轴
 	{
-		if ((a.getStart() == b.getNode1() && (a.judge(b.getNode2()) == false)) || (a.getStart() == b.getNode2() && (a.judge(b.getNode1()) == false)))
-		{
-			node_set_delete(a.getStart());
-		}
 		return;
 	}
 	else if (a.getExitK() && b.getExitK()) //a,b均存在斜率
 	{
-		if (a.getK() == b.getK())
-		{
-			if ((a.getStart() == b.getNode1() && (a.judge(b.getNode2()) == false)) || (a.getStart() == b.getNode2() && (a.judge(b.getNode1()) == false)))
-			{
-				node_set_delete(a.getStart());
-			}
-			return;
-		}
+		if (a.getK() == b.getK())return;
 		ans = findIntersectionrs(a, b);
 		if (b.judge(ans) == false || a.judge(ans) == false)return;
 		node_set_delete(ans);
@@ -951,7 +853,7 @@ void Delete(string l)
 		get_int(l,&a,&b,&c,&d);
 		node n1(a, b), n2(c, d);
 		line tmp(n1, n2);
-		for (vector<line>::iterator j = lseq.begin(); j != lseq.end();j++)
+		for (vector<line>::iterator j = lseq.begin(); j != lseq.end();)
 		{
 			line tmp1 = *j;
 			if (tmp1 == tmp) {
@@ -978,7 +880,7 @@ void Delete(string l)
 		get_int(l, &a, &b, &c);
 		node n1(a, b);
 		Cycle tmp(n1, c);
-		for (vector<Cycle>::iterator j = cseq.begin(); j != cseq.end();j++)
+		for (vector<Cycle>::iterator j = cseq.begin(); j != cseq.end();)
 		{
 			Cycle tmp1 = *j;
 			if (tmp1 == tmp) {
@@ -1004,7 +906,7 @@ void Delete(string l)
 		get_int(l, &a, &b, &c, &d);
 		node n1(a, b), n2(c, d);
 		lise tmp(n1, n2);
-		for (vector<lise>::iterator j = sseq.begin(); j != sseq.end();j++)
+		for (vector<lise>::iterator j = sseq.begin(); j != sseq.end();)
 		{
 			lise tmp1 = *j;
 			if (tmp1 == tmp) {
@@ -1031,7 +933,7 @@ void Delete(string l)
 		get_int(l, &a, &b, &c, &d);
 		node n1(a, b), n2(c, d);
 		rays tmp(n1, n2);
-		for (vector<rays>::iterator j = rseq.begin(); j != rseq.end();j++)
+		for (vector<rays>::iterator j = rseq.begin(); j != rseq.end();)
 		{
 			rays tmp1 = *j;
 			if (tmp1 == tmp) {
@@ -1171,10 +1073,13 @@ bool Add(string l)
 		rseq.push_back(tmp);
 	}
 	else {
-		error_output("wrong input!\n");
-		return false;
+		try {
+			throw "wrong input!\n";
+		}
+		catch (const char* msg) {
+			cerr << msg << endl;
+		}
 	}
-	return true;
 }
 
 void read_file(string input_file)
@@ -1313,12 +1218,6 @@ int main(int argc, char** argv)
 {
 	read_file("input.txt");//argv[2]
 	ofstream outfile("output.txt");   // argv[4]
-	cout << countn << endl;
-	Delete("S 0 0 1 1");
 	cout << countn;
-	/*
-	lise a(node(0, 0), node(1, 1)), b(node(0, 0), node(-1, -1));
-	if (a == b)printf("1");
-	else printf("2");*/
 	return 0;
 }

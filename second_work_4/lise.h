@@ -21,13 +21,6 @@ public:
 	{
 		if (node1 == other.node1 && node2 == other.node2) return true;
 		else if (node1 == other.node2 && node2 == other.node1)return true;
-		else if (a == other.a && b == other.b && c == other.c) {
-			if ((node1.x - other.node1.x) * (node2.x - other.node1.x) < 0)return true;
-			if ((node1.x - other.node2.x) * (node2.x - other.node2.x) < 0)return true;
-			if ((node1.y - other.node1.y) * (node2.y - other.node1.y) < 0)return true;
-			if ((node1.y - other.node2.y) * (node2.y - other.node2.y) < 0)return true;
-			return false;
-		}
 		else return false;
 	}
 };

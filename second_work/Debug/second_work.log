@@ -1,14 +1,6 @@
-﻿  Cycle.cpp
-  line.cpp
-  lise.cpp
-  node.cpp
-  rays.cpp
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\rays.cpp(58,73): warning C4101: “tmp”: 未引用的局部变量
-  second_work.cpp
+﻿  second_work.cpp
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(46,20): warning C4018: “<”: 有符号/无符号不匹配
 F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(68,20): warning C4018: “<”: 有符号/无符号不匹配
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(799,42): warning C4018: “<”: 有符号/无符号不匹配
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(824,49): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
-F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(1083): warning C4715: “Add”: 不是所有的控件路径都返回值
+F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(897,42): warning C4018: “<”: 有符号/无符号不匹配
+F:\learning\大三下\软件工程\实验\second\intersect\second_work\second_work.cpp(922,49): warning C4018: “<”: 有符号/无符号不匹配
   second_work.vcxproj -> F:\learning\大三下\软件工程\实验\second\intersect\Debug\second_work.exe
