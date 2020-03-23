@@ -17,10 +17,5 @@ public:
 	double getK();
 	bool getExitK();
 	bool judge(node n);
-	bool operator ==(const struct rays& other) const
-	{
-		if (start == other.start && n == other.n) return true;
-		else return false;
-	}
 };
 

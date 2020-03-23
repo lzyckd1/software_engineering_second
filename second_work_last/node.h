@@ -14,10 +14,5 @@ public:
 		else if (x == other.x && y < other.y) return true;
 		else return false;
 	}
-	bool operator ==(const struct node& other) const
-	{
-		if (x == other.x && y == other.y) return true;
-		else return false;
-	}
 };
 
